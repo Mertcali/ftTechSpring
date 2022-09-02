@@ -1,0 +1,11 @@
+INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (1,'MSI Laptop',9000,'2025-09-01')
+INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (2,'Asus Laptop',7000,'2025-09-01')
+INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (3,'Dell Laptop',7000,'2025-09-01')
+INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (4,'Acer Laptop',5000,'2025-09-01')
+INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (5,'Lenovo Laptop',6000,'2025-09-01')
+
+INSERT INTO users (user_id,first_name,last_name,email,phone_number) VALUES (1,'User1','User1LN','User1@gmail.com','1111111111')
+INSERT INTO users (user_id,first_name,last_name,email,phone_number) VALUES (2,'User2','User2LN','User2@gmail.com','2222222222')
+INSERT INTO users (user_id,first_name,last_name,email,phone_number) VALUES (3,'User3','User3LN','User3@gmail.com','3333333333')
+INSERT INTO users (user_id,first_name,last_name,email,phone_number) VALUES (4,'User4','User4LN','User4@gmail.com','4444444444')
+INSERT INTO users (user_id,first_name,last_name,email,phone_number) VALUES (5,'User5','User5LN','User5@gmail.com','5555555555')
