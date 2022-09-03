@@ -1,5 +1,6 @@
 package com.example.ftteknoloji.entities.concretes;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -42,7 +43,7 @@ public class ProductReview {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "review_date")
-	private Date reviewDate;
+	private LocalDate reviewDate;
 	
 
 	

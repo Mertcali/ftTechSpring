@@ -52,5 +52,15 @@ public class ProductsController {
 	public DataResult<List<ListProductsResponse>> getAll(){
 		return this.productService.getAll();
 	}
+	
+	@GetMapping("/getproductsthathavenotexpired")
+	public DataResult<List<ListProductsResponse>> getProductsThatHaveNotExpired(){
+		return this.productService.getProductsThatHaveNotExpired();
+	}
+	
+	@GetMapping("/getproductsexpired")
+	public DataResult<List<ListProductsResponse>> getProductsExpired(){
+		return this.productService.getProductsExpired();
+	}
 
 }

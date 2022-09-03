@@ -17,7 +17,7 @@ public class ListProductReviewsResponse {
 	private int productReviewId;
 	private String review;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date reviewDate;
+	private LocalDate reviewDate;
 	private int productId;
 	private int userId;
 

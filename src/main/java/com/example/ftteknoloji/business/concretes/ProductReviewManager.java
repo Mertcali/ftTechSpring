@@ -1,7 +1,11 @@
 package com.example.ftteknoloji.business.concretes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +41,113 @@ public class ProductReviewManager implements ProductReviewService{
 		this.productRepository = productRepository;
 	}
 
-	//Burada modelMapper yerine manuelMapping kullandım. Lombok builder tercih edilebilir.
+	
+//***************************İSTERLER***************************
+
+	@Override
+	public DataResult<List<ListProductReviewsResponse>> listProductReviewsForProduct(int id) {
+		List<ProductReview> productReviews = this.productReviewRepository.findByProduct_ProductId(id);
+		List<ListProductReviewsResponse> response = new ArrayList<ListProductReviewsResponse>();
+		for (ProductReview productReview : productReviews) {
+			ListProductReviewsResponse responseProductReview = new ListProductReviewsResponse();
+			responseProductReview.setProductId(productReview.getProduct().getProductId());
+			responseProductReview.setProductReviewId(productReview.getProductReviewId());
+			responseProductReview.setReview(productReview.getReview());
+			responseProductReview.setReviewDate(productReview.getReviewDate());
+			responseProductReview.setUserId(productReview.getUser().getUserId());
+			response.add(responseProductReview);
+			
+		}
+		
+		return new SuccessDataResult<List<ListProductReviewsResponse>>(response);
+		
+	}
+
+
+	@Override
+	public DataResult<List<ListProductReviewsResponse>> listProductReviewsForUser(int id) {
+		
+		List<ProductReview> productReviews = this.productReviewRepository.findByUser_UserId(id);
+		List<ListProductReviewsResponse> response = new ArrayList<ListProductReviewsResponse>();
+		for (ProductReview productReview : productReviews) {
+			ListProductReviewsResponse responseProductReview = new ListProductReviewsResponse();
+			responseProductReview.setProductId(productReview.getProduct().getProductId());
+			responseProductReview.setProductReviewId(productReview.getProductReviewId());
+			responseProductReview.setReview(productReview.getReview());
+			responseProductReview.setReviewDate(productReview.getReviewDate());
+			responseProductReview.setUserId(productReview.getUser().getUserId());
+			response.add(responseProductReview);
+			
+		}
+		
+		return new SuccessDataResult<List<ListProductReviewsResponse>>(response);
+	}
+
+
+
+	@Override
+	public DataResult<List<ListProductReviewsResponse>> listProductReviewsWithDateForProduct
+	(String startDate, String endDate,int productId) {
+		
+		LocalDate startDateFormatted = LocalDate.parse(startDate);
+		LocalDate endDateFormatted = LocalDate.parse(endDate);
+	
+		List<LocalDate> localDates = startDateFormatted.datesUntil(endDateFormatted).collect(Collectors.toList());
+		List<ProductReview> productReviews= this.productReviewRepository.findByProduct_ProductId(productId);		
+		List<ListProductReviewsResponse> response = new ArrayList<ListProductReviewsResponse>();
+		
+		for (ProductReview productReview : productReviews) {
+			if(localDates.contains(productReview.getReviewDate())) {
+				ListProductReviewsResponse responseProductReview = new ListProductReviewsResponse();
+				responseProductReview.setProductId(productReview.getProduct().getProductId());
+				responseProductReview.setProductReviewId(productReview.getProductReviewId());
+				responseProductReview.setReview(productReview.getReview());
+				responseProductReview.setReviewDate(productReview.getReviewDate());
+				responseProductReview.setUserId(productReview.getUser().getUserId());
+				response.add(responseProductReview);
+			}
+									
+		}
+		
+		return new SuccessDataResult<List<ListProductReviewsResponse>>(response);
+	}
+
+
+
+
+
+	@Override
+	public DataResult<List<ListProductReviewsResponse>> listProductReviewsWithDateForUser(String startDate,
+			String endDate, int userId) {
+		
+		LocalDate startDateFormatted = LocalDate.parse(startDate);
+		LocalDate endDateFormatted = LocalDate.parse(endDate);
+	
+		List<LocalDate> localDates = startDateFormatted.datesUntil(endDateFormatted).collect(Collectors.toList());
+		List<ProductReview> productReviews= this.productReviewRepository.findByUser_UserId(userId);		
+		List<ListProductReviewsResponse> response = new ArrayList<ListProductReviewsResponse>();
+		
+		for (ProductReview productReview : productReviews) {
+			if(localDates.contains(productReview.getReviewDate())) {
+				ListProductReviewsResponse responseProductReview = new ListProductReviewsResponse();
+				responseProductReview.setProductId(productReview.getProduct().getProductId());
+				responseProductReview.setProductReviewId(productReview.getProductReviewId());
+				responseProductReview.setReview(productReview.getReview());
+				responseProductReview.setReviewDate(productReview.getReviewDate());
+				responseProductReview.setUserId(productReview.getUser().getUserId());
+				response.add(responseProductReview);
+			}
+									
+		}
+		
+		return new SuccessDataResult<List<ListProductReviewsResponse>>(response);
+	}
+
+	
+	
+	
+//***************************CRUD OPERASYONLAR***************************
+	
 	@Override
 	public Result add(CreateProductReviewRequest createProductReviewRequest) {
 		ProductReview productReview = new ProductReview();
@@ -56,14 +166,14 @@ public class ProductReviewManager implements ProductReviewService{
 		productReview.setReview(updateProductReviewRequest.getReview());
 		productReview.setReviewDate(updateProductReviewRequest.getReviewDate());
 		productReview.setUser(this.userRepository.findById(updateProductReviewRequest.getUserId()));
+		productReview.setProductReviewId(updateProductReviewRequest.getProductReviewId());
 		this.productReviewRepository.save(productReview);
 		return new SuccessResult();
 	}
 
 	@Override
 	public Result delete(DeleteProductReviewRequest deleteProductReviewRequest) {
-		ProductReview productReview = new ProductReview();
-		productReview.setProductReviewId(deleteProductReviewRequest.getProductReviewId());
+		ProductReview productReview = this.productReviewRepository.findById(deleteProductReviewRequest.getProductReviewId());
 		this.productReviewRepository.delete(productReview);
 		return new SuccessResult();
 	}
@@ -100,4 +210,15 @@ public class ProductReviewManager implements ProductReviewService{
 		return new SuccessDataResult<List<ListProductReviewsResponse>>(response);
 	}
 
+
+
+
+
+	
+
+
+
+
+
+	
 }

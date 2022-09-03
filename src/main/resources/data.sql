@@ -3,6 +3,7 @@ INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (2,'
 INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (3,'Dell Laptop',7000,'2025-09-01')
 INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (4,'Acer Laptop',5000,'2025-09-01')
 INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (5,'Lenovo Laptop',6000,'2025-09-01')
+INSERT INTO products (product_id,product_name,price,expiration_date) VALUES (6,'Domates',2,'2021-09-01')
 
 INSERT INTO users (user_id,first_name,last_name,email,phone_number) VALUES (1,'User1','User1LN','User1@gmail.com','1111111111')
 INSERT INTO users (user_id,first_name,last_name,email,phone_number) VALUES (2,'User2','User2LN','User2@gmail.com','2222222222')

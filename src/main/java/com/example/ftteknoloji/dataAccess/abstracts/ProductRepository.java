@@ -8,5 +8,6 @@ import com.example.ftteknoloji.entities.concretes.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	Product findById(int id);
+	Product findByProductName(String name);
 
 }

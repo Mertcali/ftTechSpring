@@ -18,5 +18,8 @@ public interface ProductService {
 	DataResult<GetProductResponse> getById(int id);
 	DataResult<List<ListProductsResponse>> getAll();
 	
+	DataResult<List<ListProductsResponse>> getProductsThatHaveNotExpired();
+	DataResult<List<ListProductsResponse>> getProductsExpired();
+	
 
 }

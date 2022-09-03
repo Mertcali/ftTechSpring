@@ -1,11 +1,15 @@
 package com.example.ftteknoloji.api.controllers;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ftteknoloji.business.abstracts.ProductReviewService;
@@ -52,5 +56,25 @@ public class ProductReviewsController {
 	@GetMapping("/getall")
 	public DataResult<List<ListProductReviewsResponse>> getAll(){
 		return this.productReviewService.getAll();
+	}
+	
+	@GetMapping("getreviewsforproduct")
+	public DataResult<List<ListProductReviewsResponse>>  listProductReviewsForProduct(int id){
+		return this.productReviewService.listProductReviewsForProduct(id);
+	}
+	
+	@GetMapping("getreviewsforuser")
+	public DataResult<List<ListProductReviewsResponse>>  listProductReviewsForUser(int id){
+		return this.productReviewService.listProductReviewsForUser(id);
+	}
+	
+	@GetMapping("getreviewswithdateforproduct")
+	public DataResult<List<ListProductReviewsResponse>>  listProductReviewsWithDateForProduct(String startDate, String endDate, int productId){
+		return this.productReviewService.listProductReviewsWithDateForProduct(startDate, endDate, productId);
+	}
+	
+	@GetMapping("getreviewswithdateforuser")
+	public DataResult<List<ListProductReviewsResponse>>  listProductReviewsWithDateForUser(String startDate, String endDate, int userId){
+		return this.productReviewService.listProductReviewsWithDateForUser(startDate, endDate, userId);
 	}
 }

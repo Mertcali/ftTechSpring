@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,7 +33,7 @@ public class Product {
 	private double price;
 	
 	@Column(name = "expiration_date")
-	private Date expirationDate;
+	private LocalDate expirationDate;
 	
 	@OneToMany(mappedBy = "product")
 	private List<ProductReview> productReviews;
