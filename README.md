@@ -43,7 +43,6 @@ Kullanılanlar:
 - Lombok
 - Database olarak H2 ile InMemory çalışıldı
 - Spring Validation
-- Business Exception
 - ModelMapperService kullanılmıştı ancak ProductReview maplemesinde sorun çıktığı için manuel map'e dönüldü.
 - Request Response pattern
 - Result Pattern
