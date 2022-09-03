@@ -49,6 +49,8 @@ Kullanılanlar:
 - Exception Handling, Validation Exception Handling
 - CRUD İşlemler ve İsterler tamamlandı.
 - Swagger üzerinden bütün testler yapıldı.
+- Resources klasöründe oluşan data.sql veritabanında sadece Product ve User için örnek veriler oluşturuldu, ProductReview için ekleme yapılması lazım.
+- Product ve User için @GeneratedValue kapatıldı, testler için idler el ile girildi o yüzden requestler içerisinde product ve user için id istenildi.
 
 
 
